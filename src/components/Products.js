@@ -10,7 +10,7 @@ const Products = () => {
 
    useEffect(() => {
       dispatch(fetchProducts());
-   }, []);
+   }, [dispatch]);
 
    return (
       <Container className="my-3">
