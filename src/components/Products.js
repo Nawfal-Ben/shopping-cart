@@ -5,18 +5,18 @@ import { addToCart } from "../rtk/cart-slice";
 import { fetchProducts } from "../rtk/products-slice";
 
 const Products = () => {
+   const products = useSelector((state) => state.products);
+   const dispatch = useDispatch();
+
    useEffect(() => {
       dispatch(fetchProducts());
    }, []);
-
-   const products = useSelector((state) => state.products);
-   const dispatch = useDispatch();
 
    return (
       <Container className="my-3">
          <Row className="g-3 justify-content-center">
             {products.map((product) => (
-               <Col key={product.id} style={{flex: "0"}}>
+               <Col key={product.id} style={{ flex: "0" }}>
                   <Card style={{ width: "18rem", height: "550px" }}>
                      <Card.Img
                         variant="top"
@@ -27,11 +27,18 @@ const Products = () => {
                         <Card.Title>
                            {product.title.slice(0, 40) + "..."}
                         </Card.Title>
-                        <span style={{"fontSize": "30px"}}>{product.price}$</span>
+                        <span style={{ fontSize: "30px" }}>
+                           {product.price}$
+                        </span>
                         <Card.Text>
                            {product.description.slice(0, 50) + "..."}
                         </Card.Text>
-                        <Button variant="primary" onClick={() => dispatch(addToCart(product))}>Add to Cart</Button>
+                        <Button
+                           variant="primary"
+                           onClick={() => dispatch(addToCart(product))}
+                        >
+                           Add to Cart
+                        </Button>
                      </Card.Body>
                   </Card>
                </Col>
